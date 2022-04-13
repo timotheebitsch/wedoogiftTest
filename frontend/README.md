@@ -13,7 +13,7 @@ The documentation of the API is available in `calculator-server/doc.md`.
 
 ## Topic
 
-In an **Angular 5** project, allow users to find a combination of cards allowing him to reach the desired value.
+In an **Angular 2+** project, allow users to find a combination of cards allowing him to reach the desired value.
 
 For example, an user is interested to make a 30€ purchase in the shop **WedooStore** with the id **5**.
 Our REST API will help him and find the suitable combination of cards to reach this amount.
