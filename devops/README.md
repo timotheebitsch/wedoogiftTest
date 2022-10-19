@@ -1,11 +1,11 @@
-# Wedoogift DevOps challenge
+# Glady DevOps challenge
 You are interested in joining our DevOps team ? try to accomplish this challenge, we will be glad to see
 your work and give you a feedback.
 
 ## Expected deliverable
-* Architecture Diagram with the relevant AWS components, you can choose any tools to create your diagram. (Must Have)
-* Describe why you chose each component. (Must Have)
-* CloudFormation template corresponding to your architecture. (Optional)
+* Architecture Diagram with the relevant AWS components, you can choose any tools to create your diagram.
+* Describe why you chose each component.
+* An IaC implementation corresponding to your architecture.
 
 ## Problem to solve
 ![offerwall](assets/offerwall.png)
