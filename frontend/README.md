@@ -77,7 +77,9 @@ Votre montant est composé des cartes suivantes :
 
 ```
 
-## Level 3 (bonus)
+## Level 3
+
+*This level is mandatory for front-end developers positions. It's only a bonus level for full stack developers positions.*
 
 Refactor the component so that it can be used as a form control in a reactive form (FormGroup).
 
