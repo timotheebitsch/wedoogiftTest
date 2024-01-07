@@ -6,16 +6,19 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.wedoogift.model.Company;
 import com.example.wedoogift.model.User;
 
 public class BalanceCalculatorServiceTest {
+	
+	DistributionService distributionService = new DistributionService();
 
 	@Test
     void testCalculateGiftBalance() {
         BalanceCalculatorService balanceCalculatorService = new BalanceCalculatorService();
         User user = new User();
-        user.addGiftBalance(50, LocalDate.now());
-        user.addGiftBalance(30, LocalDate.now().minusDays(100));
+        distributionService.addGiftBalance(user, 50, LocalDate.now());
+        distributionService.addGiftBalance(user, 30, LocalDate.now().minusDays(100));
         double calculatedBalance = balanceCalculatorService.calculateGiftBalance(user);
         assertEquals(80, calculatedBalance);
     }
@@ -24,9 +27,9 @@ public class BalanceCalculatorServiceTest {
     void testCalculateGiftBalanceWithExpired() {
         BalanceCalculatorService balanceCalculatorService = new BalanceCalculatorService();
         User user = new User();
-        user.addGiftBalance(50, LocalDate.now());
-        user.addGiftBalance(30, LocalDate.now().minusDays(100));
-        user.addGiftBalance(30, LocalDate.now().minusDays(366));
+        distributionService.addGiftBalance(user, 50, LocalDate.now());
+        distributionService.addGiftBalance(user, 30, LocalDate.now().minusDays(100));
+        distributionService.addGiftBalance(user, 30, LocalDate.now().minusDays(366));
         double calculatedBalance = balanceCalculatorService.calculateGiftBalance(user);
         assertEquals(80, calculatedBalance);
     }
@@ -35,8 +38,8 @@ public class BalanceCalculatorServiceTest {
     void testCalculateMealBalance() {
         BalanceCalculatorService balanceCalculatorService = new BalanceCalculatorService();
         User user = new User();
-        user.addMealBalance(20, LocalDate.now());
-        user.addMealBalance(40, LocalDate.now().minusMonths(6));
+        distributionService.addMealBalance(user, 20, LocalDate.now());
+        distributionService.addMealBalance(user, 40, LocalDate.now().minusMonths(6));
         double calculatedBalance = balanceCalculatorService.calculateMealBalance(user);
         assertEquals(60, calculatedBalance);
     }
@@ -45,9 +48,9 @@ public class BalanceCalculatorServiceTest {
     void testCalculateMealBalanceWithExpired() {
         BalanceCalculatorService balanceCalculatorService = new BalanceCalculatorService();
         User user = new User();
-        user.addMealBalance(20, LocalDate.now());
-        user.addMealBalance(40, LocalDate.now().minusMonths(6));
-        user.addMealBalance(40, LocalDate.now().minusMonths(365));
+        distributionService.addMealBalance(user, 20, LocalDate.now());
+        distributionService.addMealBalance(user, 40, LocalDate.now().minusMonths(6));
+        distributionService.addMealBalance(user, 40, LocalDate.now().minusMonths(365));
         double calculatedBalance = balanceCalculatorService.calculateMealBalance(user);
         assertEquals(60, calculatedBalance);
     }

@@ -11,9 +11,23 @@ import com.example.wedoogift.model.MealDistribution;
 public class MealDistributionTest {
 	
 	 @Test
-	    void testExpirationDate() {
-	        MealDistribution mealDistribution = new MealDistribution(50, LocalDate.of(2020, 1, 1));
-	        LocalDate expectedExpirationDate = LocalDate.of(2021, 2, 28);
+	    void testExpirationDateSameYear() {
+	        MealDistribution mealDistribution = new MealDistribution(50, LocalDate.of(2023, 1, 1));
+	        LocalDate expectedExpirationDate = LocalDate.of(2023, 2, 28);
+	        assertEquals(expectedExpirationDate, mealDistribution.getExpirationDate());
+	    }
+	 
+	 @Test
+	    void testExpirationDateNextYear() {
+	        MealDistribution mealDistribution = new MealDistribution(50, LocalDate.of(2023, 3, 1));
+	        LocalDate expectedExpirationDate = LocalDate.of(2024, 2, 29);
+	        assertEquals(expectedExpirationDate, mealDistribution.getExpirationDate());
+	    }
+	 
+	 @Test
+	    void testExpirationDateSameYearSameMonth() {
+	        MealDistribution mealDistribution = new MealDistribution(50, LocalDate.of(2023, 2, 15));
+	        LocalDate expectedExpirationDate = LocalDate.of(2023, 2, 28);
 	        assertEquals(expectedExpirationDate, mealDistribution.getExpirationDate());
 	    }
 	 

@@ -1,30 +1,24 @@
 package com.example.wedoogift.model;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
-import com.example.wedoogift.interfaces.Distribution;
-
-public class MealDistribution implements Distribution {
-    private double amount;
-    private LocalDate distributionDate;
+public class MealDistribution extends Distribution {
 
     public MealDistribution(double amount, LocalDate distributionDate) {
-        this.amount = amount;
-        this.distributionDate = distributionDate;
-    }
-
-    @Override
-    public double getAmount() {
-        return amount;
-    }
-
-    @Override
-    public LocalDate getDistributionDate() {
-        return distributionDate;
+        super(amount, distributionDate);
     }
 
     @Override
     public LocalDate getExpirationDate() {
-        return distributionDate.plusMonths(14).withDayOfMonth(1).minusDays(1);
+    	int year;
+        if (this.getDistributionDate().getMonthValue() > 2) {
+        	year = this.getDistributionDate().getYear() + 1;
+        } else {
+        	year = this.getDistributionDate().getYear();
+        }
+        YearMonth yearMonth = YearMonth.of(year, 2);
+        int dernierJour = yearMonth.lengthOfMonth();
+        return LocalDate.of(year, 2, dernierJour);
     }
 }
