@@ -31,18 +31,4 @@ public class User {
     public void addMealBalance(double amount, LocalDate distributionDate) {
         mealBalances.add(new MealDistribution(amount, distributionDate));
     }
-
-    public double calculateGiftBalance(LocalDate currentDate) {
-        return giftBalances.stream()
-                .filter(distribution -> !distribution.getExpirationDate().isBefore(currentDate))
-                .mapToDouble(Distribution::getAmount)
-                .sum();
-    }
-
-    public double calculateMealBalance(LocalDate currentDate) {
-        return mealBalances.stream()
-                .filter(distribution -> !distribution.getExpirationDate().isBefore(currentDate))
-                .mapToDouble(Distribution::getAmount)
-                .sum();
-    }
 }
