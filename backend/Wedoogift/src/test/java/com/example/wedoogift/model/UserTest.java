@@ -1,4 +1,4 @@
-package com.example.wedoogift;
+package com.example.wedoogift.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.wedoogift.objects.GiftDistribution;
-import com.example.wedoogift.objects.MealDistribution;
-import com.example.wedoogift.objects.User;
+import com.example.wedoogift.model.GiftDistribution;
+import com.example.wedoogift.model.MealDistribution;
+import com.example.wedoogift.model.User;
+import com.example.wedoogift.services.BalanceCalculatorService;
 
 public class UserTest {
 	
@@ -30,5 +31,6 @@ public class UserTest {
         assertEquals(1, mealBalances.size());
         assertEquals(30, mealBalances.get(0).getAmount());
     }
+   
 
 }

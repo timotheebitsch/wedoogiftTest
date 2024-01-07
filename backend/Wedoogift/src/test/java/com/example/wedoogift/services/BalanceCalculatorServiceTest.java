@@ -1,4 +1,4 @@
-package com.example.wedoogift;
+package com.example.wedoogift.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.wedoogift.objects.User;
+import com.example.wedoogift.model.User;
 import com.example.wedoogift.services.BalanceCalculatorService;
 
 public class BalanceCalculatorServiceTest {

@@ -2,7 +2,7 @@ package com.example.wedoogift.services;
 
 import java.time.LocalDate;
 
-import com.example.wedoogift.objects.User;
+import com.example.wedoogift.model.User;
 
 public class BalanceCalculatorService {
     public double calculateGiftBalance(User user, LocalDate currentDate) {

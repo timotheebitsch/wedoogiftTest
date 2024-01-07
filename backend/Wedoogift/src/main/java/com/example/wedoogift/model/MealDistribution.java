@@ -1,4 +1,4 @@
-package com.example.wedoogift.objects;
+package com.example.wedoogift.model;
 
 import java.time.LocalDate;
 
