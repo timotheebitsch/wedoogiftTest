@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,7 +43,7 @@ public class DistributionControllerTest {
     private ArgumentCaptor<Long> idCaptor;    
 
     @Test
-    public void printCompanyBalanceTest() throws Exception {
+    public void printCompanyBalanceTest_200() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/print-company-balance/1"))
                 .andExpect(status().isOk());
         
@@ -54,7 +55,7 @@ public class DistributionControllerTest {
     }
     
     @Test
-    public void printUserBalanceTest() throws Exception {
+    public void printUserBalanceTest_200() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/print-user-balance/1"))
                 .andExpect(status().isOk());
         
@@ -66,13 +67,13 @@ public class DistributionControllerTest {
     }
       
     @Test
-    public void printAllBalanceTest() throws Exception {
+    public void printAllBalanceTest_200() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.get("/print-all-balance"))
                 .andExpect(status().isOk());
     }
     
     @Test
-    public void depositItemTest() throws Exception {
+    public void depositItemTest_200() throws Exception {
         CompanyDistribution companyDistribution = new CompanyDistribution(1L, 1L, ItemType.GIFT, LocalDate.of(2024, 05, 01) , 60);
         when(distributionService.distribute(companyDistribution)).thenReturn(true);
 
@@ -80,6 +81,36 @@ public class DistributionControllerTest {
         .content(asJsonString(companyDistribution))
 		.contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
+    }
+    
+    @Test
+    public void depositItemTest_400() throws Exception {
+    	CompanyDistribution companyDistribution = new CompanyDistribution(1L, 1L, ItemType.GIFT, LocalDate.of(2024, 05, 01) , 60);
+        when(distributionService.distribute(eq(companyDistribution))).thenReturn(true);
+
+        //With mistake in distributionDate spelling
+        this.mvc.perform(MockMvcRequestBuilders.post("/deposit")
+        .content("{\r\n"
+        		+ "    \"companyId\":1,\r\n"
+        		+ "    \"userId\":1,\r\n"
+        		+ "    \"itemType\":\"GIFT\",\r\n"
+        		+ "    \"distribuionDate\":\"2024-05-01\",\r\n"
+        		+ "    \"amount\":60\r\n"
+        		+ "}")
+		.contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+    public void depositItemTest_404() throws Exception {
+    	CompanyDistribution companyDistribution = new CompanyDistribution(1L, 1L, ItemType.GIFT, LocalDate.of(2024, 05, 01) , 60);
+        when(distributionService.distribute(eq(companyDistribution))).thenReturn(true);
+
+        //With mistake in url
+        this.mvc.perform(MockMvcRequestBuilders.post("/deposi")
+                .content(asJsonString(companyDistribution))
+        		.contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
     
     public static String asJsonString(final Object obj) {
